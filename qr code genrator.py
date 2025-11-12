@@ -11,9 +11,14 @@ if inp=='1':
         data=file.read()
     img =qrcode.make(data)
     img.save(save_path)
-    print("u r qrocde is genrated ")
+    print("u r qrcode is genrated :)")
 elif inp=='2':
-    print("i am still working on it bro :(")
+    url=input("enter the url you want to convert into qr code:")
+    save_name=input("enter the name to save your qr code iamge without typing .png:")
+    save_path=f"C:\\Users\\dell\\Desktop\\qr code genarator by ak\\{save_name}.png"
+    img=qrcode.make(url)
+    img.save(save_path)
+    print("u r qrcode is generated :)")
 elif inp=='3':
     print("i am still working on it bro :(")
 
