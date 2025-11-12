@@ -20,6 +20,9 @@ elif inp=='2':
     img.save(save_path)
     print("u r qrcode is generated :)")
 elif inp=='3':
-    print("i am still working on it bro :(")
-
-
+    google_link=input("enter the google drive link of the file you want to convert into qr code:")
+    save_name=input("enter the name to save your qr code image without typing .png:")
+    save_path=f"C:\\Users\\dell\\Desktop\\qr code genarator by ak\\{save_name}.png"
+    img=qrcode.make(google_link)
+    img.save(save_path)
+    print("u r qrcode is generated :)")
