@@ -19,13 +19,6 @@ Prerequisites:
 Install dependency:
 ~pip install qrcode[pil]
 
-Installation:
-
-Clone this repository:
-
-~git clone https://github.com/abishek-005/QR-CODE-GENERATOR.git
-~cd your-repo-name
-
 ## Author
 **Ssj_Ak (Abishek)**  
 Python Developer | Tech Enthusiast | Creator of this QR Code Generator
