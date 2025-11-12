@@ -19,7 +19,7 @@ Install dependency:
 
 Installation
 Clone this repository:
-~git clone https://github.com/your-username/your-repo-name.git
+~git clone https://github.com/abishek-005/QR-CODE-GENERATOR.git
 ~cd your-repo-name
 
 ## Author
