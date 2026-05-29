@@ -33,7 +33,7 @@ pip install qrcode[pil]
      * Copy the link and paste it into the generator!
 
 ## 👨‍💻 Author
-Ssj_Ak (Abishek)
+Abishek 005
 AI/ML Developer | Python Developer | Tech Enthusiast
 
 📫 Contact: ak.abishek005@gmail.com
