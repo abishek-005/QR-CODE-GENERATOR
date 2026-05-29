@@ -1,27 +1,26 @@
-QR Code Generator:
-A small Python utility to generate QR codes from text, file contents, or shareable links (Google Drive, GitHub, etc.). 
-Simple, lightweight, and ideal for quickly converting files or links into QR images you can scan.
+# ⚡ Quick QR Code Generator
 
-Generate QR code from:
+A lightweight Python utility to instantly convert text, files, or cloud links (Google Drive, GitHub, etc.) into scannable QR codes.
 
-i)Plain text or URL
-ii)Contents of a text file (.txt, .py, .html, etc.)
-iii)folder which contains files(frist you have to convert your folder into zip file and upload it on the google drive make sure it is public and then copy the link and paste it)
+---
 
-Prompt for a custom filename for the output image
-Strips accidental surrounding quotes from input paths/links
-Works with standard qrcode Python package
+## ✨ Features
 
-Prerequisites:
+* **Versatile Inputs:** Generates QR codes from:
+  * Plain text or URLs.
+  * Local file contents (`.txt`, `.py`, `.html`, etc.).
+  * Shared cloud folders (e.g., zipped folders uploaded to Google Drive).
+* **Smart Input Handling:** Automatically strips accidental quotes from paths/links.
+* **Custom Naming:** Prompts you for a custom output filename.
 
-~Python 3.7+ installed
-~qrcode package (and Pillow for image support)
-Install dependency:
-~pip install qrcode[pil]
+---
 
-## Author
-**Ssj_Ak (Abishek)**  
-Python Developer | Tech Enthusiast | Creator of this QR Code Generator
+## 🚀 Getting Started
 
-📧 Contact: [ak.abishek005@gmail.com]  
-🌐 GitHub: (https://github.com/abishek-005)
+### Prerequisites
+* Python 3.7+
+* `qrcode` library with Pillow support
+
+### Installation
+```bash
+pip install qrcode[pil]
