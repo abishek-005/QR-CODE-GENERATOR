@@ -24,3 +24,18 @@ A lightweight Python utility to instantly convert text, files, or cloud links (G
 ### Installation
 ```bash
 pip install qrcode[pil]
+
+ ## 🛠️ How to Use Zipped Folders
+    To share an entire folder via QR code:
+     * Compress your folder into a .zip file.
+     * Upload it to Google Drive.
+     * Set the sharing permission to "Anyone with the link" (Public).
+     * Copy the link and paste it into the generator!
+
+## 👨‍💻 Author
+Ssj_Ak (Abishek)
+AI/ML Developer | Python Developer | Tech Enthusiast
+
+📫 Contact: ak.abishek005@gmail.com
+
+🌐 GitHub: @abishek-005
