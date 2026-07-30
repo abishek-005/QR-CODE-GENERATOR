@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QRVerse — Premium Modern QR Code Generator</title>
+    <meta name="description" content="Transform text files, URLs, and Google Drive links into high-resolution, customized QR codes instantly. Handcrafted, private, and beautifully responsive.">
+    <meta name="keywords" content="QR code generator, text to QR, URL to QR, Google drive QR code, Flask QR generator, premium UI QR generator">
+    <meta name="theme-color" content="#0F172A">
+    
+    <!-- OpenGraph / Social Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="QRVerse — Modern QR Code Studio">
+    <meta property="og:description" content="Generate crisp, customized QR codes from text files, URLs, and cloud links with ease.">
+    <meta property="og:image" content="{{ url_for('static', filename='images/logo.svg') }}">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='images/favicon.svg') }}">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress-bar" id="scroll-progress"></div>
+
+    <!-- Mouse Glow Cursor Effect -->
+    <div class="mouse-glow" id="mouse-glow"></div>
+
+    <!-- Background Animated Particles Canvas -->
+    <canvas id="bg-particles"></canvas>
+
+    <!-- Canvas for Confetti Burst -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- Toast Notification Container -->
+    <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+    <!-- Page Header & Glassmorphism Navbar -->
+    <header class="header">
+        <nav class="navbar container">
+            <a href="#" class="brand-logo">
+                <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="QRVerse Logo" class="logo-img">
+                <span class="brand-text">QR<span>Verse</span></span>
+                <span class="badge-v2">v2.0</span>
+            </a>
+
+            <div class="nav-menu" id="nav-menu">
+                <ul class="nav-list">
+                    <li><a href="#hero" class="nav-link active">Home</a></li>
+                    <li><a href="#generator" class="nav-link">Studio</a></li>
+                    <li><a href="#features" class="nav-link">Features</a></li>
+                    <li><a href="#faq" class="nav-link">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="nav-actions">
+                <!-- Theme Toggle Button -->
+                <button class="theme-toggle" id="theme-toggle-btn" title="Toggle Light/Dark Theme" aria-label="Toggle Theme">
+                    <i class="fa-solid fa-moon icon-dark"></i>
+                    <i class="fa-solid fa-sun icon-light"></i>
+                </button>
+
+                <a href="#generator" class="btn btn-sm btn-gradient nav-cta-btn">
+                    <span>Create QR</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+                <!-- Mobile Hamburger Toggle -->
+                <button class="mobile-toggle" id="mobile-toggle-btn" aria-label="Toggle Navigation Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Container -->
+    <main>
+
+        <!-- HERO SECTION -->
+        <section class="hero-section" id="hero">
+            <div class="container hero-grid">
+                <div class="hero-content">
+                    <div class="badge-pill">
+                        <span class="pulse-dot"></span>
+                        <span>Next-Generation QR Engine</span>
+                    </div>
+
+                    <h1 class="hero-title">
+                        Transform Anything Into A <span class="gradient-text">Beautiful QR Code</span>
+                    </h1>
+
+                    <p class="hero-subtitle">
+                        Convert raw text files, URLs, and Google Drive assets into high-resolution, custom QR codes in seconds. Private, zero-log, and crafted for modern professionals.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="#generator" class="btn btn-lg btn-gradient btn-glow btn-ripple">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            <span>Generate Now</span>
+                        </a>
+
+                        <a href="#features" class="btn btn-lg btn-glass">
+                            <i class="fa-solid fa-circle-play"></i>
+                            <span>Learn More</span>
+                        </a>
+                    </div>
+
+                    <!-- Floating Feature Tags -->
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <i class="fa-solid fa-bolt gradient-icon"></i>
+                            <span>Instant Generation</span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fa-solid fa-shield-halved gradient-icon"></i>
+                            <span>100% Private</span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fa-solid fa-palette gradient-icon"></i>
+                            <span>Custom Styling</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Visual Showcase / Floating Mockup -->
+                <div class="hero-visual">
+                    <div class="glowing-blob blob-1"></div>
+                    <div class="glowing-blob blob-2"></div>
+
+                    <div class="hero-card-glass">
+                        <div class="card-header-bar">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                            <span class="card-title-mini">QRVerse Engine Active</span>
+                        </div>
+
+                        <div class="hero-qr-preview">
+                            <div class="qr-frame">
+                                <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="QR Code Preview" class="hero-preview-img">
+                                <div class="scan-line"></div>
+                            </div>
+                            <div class="hero-qr-badge">
+                                <i class="fa-solid fa-circle-check"></i> 4K Vector Precision
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MAIN GENERATOR SECTION -->
+        <section class="generator-section section-padding" id="generator">
+            <div class="container">
+
+                <div class="section-header text-center">
+                    <h2 class="section-title">QR Studio</h2>
+                    <p class="section-subtitle">Select an input source below to generate your customized QR code</p>
+                </div>
+
+                <div class="generator-card glass-card">
+
+                    <!-- Modern 3-Tab Switcher -->
+                    <div class="tabs-header" role="tablist">
+                        <button class="tab-btn active" data-tab="text" role="tab" aria-selected="true">
+                            <i class="fa-solid fa-file-lines"></i>
+                            <span>📄 Text File</span>
+                        </button>
+                        <button class="tab-btn" data-tab="url" role="tab" aria-selected="false">
+                            <i class="fa-solid fa-link"></i>
+                            <span>🔗 URL</span>
+                        </button>
+                        <button class="tab-btn" data-tab="gdrive" role="tab" aria-selected="false">
+                            <i class="fa-solid fa-cloud"></i>
+                            <span>☁️ Google Drive</span>
+                        </button>
+                        <div class="tab-indicator" id="tab-indicator"></div>
+                    </div>
+
+                    <div class="tabs-content">
+
+                        <!-- TAB 1: TEXT FILE MODE -->
+                        <div class="tab-pane active" id="tab-pane-text" role="tabpanel">
+                            <div class="dropzone" id="dropzone">
+                                <input type="file" id="text-file-input" accept=".txt" class="file-input-hidden">
+                                
+                                <div class="dropzone-body">
+                                    <div class="upload-icon-wrapper">
+                                        <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                                    </div>
+                                    <h3 class="dropzone-title">Drag & drop your text file here</h3>
+                                    <p class="dropzone-desc">or <span class="browse-link">browse files</span> from your computer</p>
+                                    <span class="file-spec-badge">Supports .TXT format • Max file size 2MB</span>
+                                </div>
+
+                                <!-- Selected File Info Box -->
+                                <div class="file-selected-box hidden" id="file-info">
+                                    <div class="file-icon-badge">
+                                        <i class="fa-solid fa-file-code"></i>
+                                    </div>
+                                    <div class="file-details">
+                                        <h4 class="file-name" id="file-name-display">sample.txt</h4>
+                                        <span class="file-size" id="file-size-display">1.2 KB</span>
+                                    </div>
+                                    <button class="btn-remove-file" id="remove-file-btn" title="Remove file">
+                                        <i class="fa-solid fa-xmark"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TAB 2: URL MODE -->
+                        <div class="tab-pane" id="tab-pane-url" role="tabpanel">
+                            <div class="input-group-modern">
+                                <label for="url-input" class="input-label">
+                                    <span>Enter Web Address (URL)</span>
+                                    <span class="input-badge">Auto Validated</span>
+                                </label>
+
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-globe input-icon"></i>
+                                    <input type="url" id="url-input" class="modern-input" placeholder="https://example.com/my-portfolio" autocomplete="off">
+                                    <span class="validation-icon" id="url-valid-icon"></span>
+                                </div>
+
+                                <div class="input-feedback hidden" id="url-validation-msg">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    <span class="msg-text">Please enter a valid website address (e.g. https://yourdomain.com)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TAB 3: GOOGLE DRIVE MODE -->
+                        <div class="tab-pane" id="tab-pane-gdrive" role="tabpanel">
+                            <div class="input-group-modern">
+                                <label for="gdrive-input" class="input-label">
+                                    <span>Google Drive Shareable Link</span>
+                                    <span class="input-badge drive-badge">Drive / Docs</span>
+                                </label>
+
+                                <div class="input-wrapper">
+                                    <i class="fa-brands fa-google-drive input-icon gdrive-brand-color"></i>
+                                    <input type="url" id="gdrive-input" class="modern-input" placeholder="https://drive.google.com/file/d/1A2b3C.../view?usp=sharing" autocomplete="off">
+                                    <span class="validation-icon" id="gdrive-valid-icon"></span>
+                                </div>
+
+                                <div class="gdrive-info-chips">
+                                    <span class="chip"><i class="fa-solid fa-check"></i> Files (drive.google.com/file/d/...)</span>
+                                    <span class="chip"><i class="fa-solid fa-check"></i> Folders (drive.google.com/drive/folders/...)</span>
+                                    <span class="chip"><i class="fa-solid fa-check"></i> Docs & Sheets (docs.google.com/...)</span>
+                                </div>
+
+                                <div class="input-feedback hidden" id="gdrive-validation-msg">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    <span class="msg-text">Invalid Google Drive link format. Ensure URL starts with drive.google.com or docs.google.com</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div> <!-- /.tabs-content -->
+
+                    <!-- CUSTOMIZATION COLLAPSIBLE PANEL -->
+                    <div class="customization-accordion">
+                        <button class="accordion-toggle" id="custom-accordion-btn" type="button">
+                            <span><i class="fa-solid fa-sliders"></i> Customize QR Style & Colors</span>
+                            <i class="fa-solid fa-chevron-down accordion-arrow"></i>
+                        </button>
+
+                        <div class="accordion-body hidden" id="custom-accordion-body">
+                            <div class="custom-grid">
+                                
+                                <!-- Foreground Color -->
+                                <div class="color-picker-group">
+                                    <label for="fg-color">QR Code Color</label>
+                                    <div class="color-input-wrapper">
+                                        <input type="color" id="fg-color" value="#000000">
+                                        <input type="text" id="fg-color-hex" value="#000000" maxlength="7">
+                                    </div>
+                                </div>
+
+                                <!-- Background Color -->
+                                <div class="color-picker-group">
+                                    <label for="bg-color">Background Color</label>
+                                    <div class="color-input-wrapper">
+                                        <input type="color" id="bg-color" value="#FFFFFF">
+                                        <input type="text" id="bg-color-hex" value="#FFFFFF" maxlength="7">
+                                    </div>
+                                </div>
+
+                                <!-- Error Correction Level -->
+                                <div class="custom-select-group">
+                                    <label for="ecc-select">Error Correction</label>
+                                    <select id="ecc-select" class="modern-select">
+                                        <option value="L">Low (7% recovery)</option>
+                                        <option value="M" selected>Medium (15% recovery)</option>
+                                        <option value="Q">Quartile (25% recovery)</option>
+                                        <option value="H">High (30% recovery)</option>
+                                    </select>
+                                </div>
+
+                                <!-- Box Size / Resolution -->
+                                <div class="custom-slider-group">
+                                    <div class="slider-label-row">
+                                        <label for="box-size-slider">Resolution Scale</label>
+                                        <span id="slider-value-display">10x (HD)</span>
+                                    </div>
+                                    <input type="range" id="box-size-slider" min="6" max="20" value="10" step="1">
+                                </div>
+
+                            </div>
+
+                            <!-- Color Palette Presets -->
+                            <div class="preset-palettes">
+                                <span class="preset-label">Quick Presets:</span>
+                                <button type="button" class="preset-chip" data-fg="#000000" data-bg="#FFFFFF">Classic Mono</button>
+                                <button type="button" class="preset-chip" data-fg="#6C63FF" data-bg="#0F172A">Electric Neon</button>
+                                <button type="button" class="preset-chip" data-fg="#00D4FF" data-bg="#0D1B2A">Cyber Blue</button>
+                                <button type="button" class="preset-chip" data-fg="#8A5CFF" data-bg="#1E1B4B">Deep Violet</button>
+                                <button type="button" class="preset-chip" data-fg="#10B981" data-bg="#064E3B">Emerald</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MAIN GENERATE BUTTON -->
+                    <div class="generate-action-wrapper">
+                        <button class="btn btn-xl btn-gradient btn-glow btn-ripple" id="generate-btn">
+                            <span class="btn-text"><i class="fa-solid fa-qrcode"></i> Generate QR Code</span>
+                            <span class="btn-spinner hidden">
+                                <i class="fa-solid fa-circle-notch fa-spin"></i> Generating...
+                            </span>
+                        </button>
+                        <span class="keyboard-shortcut-hint">Tip: Press <kbd>Ctrl</kbd> + <kbd>Enter</kbd> to generate</span>
+                    </div>
+
+                </div> <!-- /.generator-card -->
+
+                <!-- RESULT MODAL / DISPLAY CARD -->
+                <div class="result-section hidden" id="result-section">
+                    <div class="result-card glass-card">
+                        
+                        <div class="result-header">
+                            <div class="success-badge">
+                                <i class="fa-solid fa-circle-check"></i> QR Code Generated!
+                            </div>
+                            <span class="summary-tag" id="result-summary-text">Source: Text File</span>
+                        </div>
+
+                        <div class="result-body">
+                            <!-- QR Image Container with Zoom & Skeleton Loader -->
+                            <div class="qr-display-box" id="qr-display-box">
+                                <div class="qr-skeleton" id="qr-skeleton"></div>
+                                <img src="" alt="Generated QR Code" id="result-qr-img" class="result-qr-img hidden">
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="result-actions">
+                                <button class="btn btn-md btn-gradient" id="download-btn">
+                                    <i class="fa-solid fa-download"></i> Download PNG
+                                </button>
+                                <button class="btn btn-md btn-glass" id="copy-image-btn" title="Copy QR image to clipboard">
+                                    <i class="fa-regular fa-copy"></i> Copy Image
+                                </button>
+                                <button class="btn btn-md btn-glass hidden" id="copy-link-btn" title="Copy input URL">
+                                    <i class="fa-solid fa-link"></i> Copy URL
+                                </button>
+                                <button class="btn btn-md btn-outline" id="reset-btn">
+                                    <i class="fa-solid fa-rotate-left"></i> Create Another
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div> <!-- /.result-section -->
+
+            </div>
+        </section>
+
+        <!-- FEATURES SECTION -->
+        <section class="features-section section-padding" id="features">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Built For Perfection</h2>
+                    <p class="section-subtitle">Everything you need for seamless QR creation in one sleek studio</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card glass-card">
+                        <div class="feature-icon-wrapper">
+                            <i class="fa-solid fa-file-circle-check"></i>
+                        </div>
+                        <h3>Text File Parser</h3>
+                        <p>Upload raw <code>.txt</code> documents up to 2MB. Converts entire text strings into standard high-density matrix format.</p>
+                    </div>
+
+                    <div class="feature-card glass-card">
+                        <div class="feature-icon-wrapper">
+                            <i class="fa-solid fa-shield-virus"></i>
+                        </div>
+                        <h3>Auto-Purge Privacy</h3>
+                        <p>All uploaded files and generated QR images are automatically deleted from server memory every 15 minutes.</p>
+                    </div>
+
+                    <div class="feature-card glass-card">
+                        <div class="feature-icon-wrapper">
+                            <i class="fa-solid fa-cloud-arrow-down"></i>
+                        </div>
+                        <h3>Google Drive Ready</h3>
+                        <p>Seamlessly handles shareable links for files, folders, spreadsheets, and presentation decks directly.</p>
+                    </div>
+
+                    <div class="feature-card glass-card">
+                        <div class="feature-icon-wrapper">
+                            <i class="fa-solid fa-sliders"></i>
+                        </div>
+                        <h3>Studio Styling</h3>
+                        <p>Customize foreground and background hex colors, scale box resolution, and tune error correction levels.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ SECTION -->
+        <section class="faq-section section-padding" id="faq">
+            <div class="container container-sm">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Frequently Asked Questions</h2>
+                    <p class="section-subtitle">Got questions? We've got answers.</p>
+                </div>
+
+                <div class="faq-list">
+                    <div class="faq-item glass-card">
+                        <button class="faq-question">
+                            <span>Is my uploaded text file or URL stored permanently?</span>
+                            <i class="fa-solid fa-plus faq-icon"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>No. Security and privacy are core priorities. Uploaded text files and generated PNG images are stored in a temporary directory and automatically purged by a server background worker every 15 minutes.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item glass-card">
+                        <button class="faq-question">
+                            <span>What formats are supported for file upload?</span>
+                            <i class="fa-solid fa-plus faq-icon"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>We currently accept plain text (<code>.txt</code>) files up to 2MB. UTF-8 and Latin-1 text encodings are supported.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item glass-card">
+                        <button class="faq-question">
+                            <span>How do I convert Google Drive file links into QR codes?</span>
+                            <i class="fa-solid fa-plus faq-icon"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Simply select the <strong>☁️ Google Drive</strong> tab, paste any shareable link generated from Google Drive or Google Docs, and click Generate. Anyone scanning the QR code will open the link in their browser.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item glass-card">
+                        <button class="faq-question">
+                            <span>Can I customize the color of the QR code?</span>
+                            <i class="fa-solid fa-plus faq-icon"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes! Click "Customize QR Style & Colors" in the generator card to pick custom foreground and background colors or choose from our curated aesthetic presets.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <a href="#" class="brand-logo">
+                    <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="QRVerse Logo" class="logo-img">
+                    <span class="brand-text">QR<span>Verse</span></span>
+                </a>
+                <p class="footer-desc">Crafted with precision for developers, designers, and creators.</p>
+            </div>
+
+            <div class="footer-links">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#generator">Studio</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-social">
+                <h4>Connect</h4>
+                <div class="social-icons">
+                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container flex-between">
+                <p>© 2026 QRVerse Studio. Built with ❤️ using Flask & Vanilla Web Technologies.</p>
+                <p class="auto-purge-note"><i class="fa-solid fa-shield-halved"></i> Auto-Purge Active</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back To Top Button -->
+    <button class="back-to-top" id="back-to-top-btn" aria-label="Scroll back to top">
+        <i class="fa-solid fa-chevron-up"></i>
+    </button>
+
+    <!-- Custom JavaScript -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
