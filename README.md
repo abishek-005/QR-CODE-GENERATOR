@@ -3,7 +3,7 @@
 **QRVerse** is a handcrafted, startup-grade QR Code Generator web application built with **Python (Flask)** on the backend and modern vanilla **HTML5, CSS3, and JavaScript** on the frontend. Inspired by world-class design systems like Stripe, Linear, Raycast, Framer, and Apple.
 
 ---
-## Live Demo:https://qr-code-generator-phi-orpin.vercel.app/
+## [Live Demo:](https://qr-code-generator-phi-orpin.vercel.app/)
 
 ## ✨ Features
 
