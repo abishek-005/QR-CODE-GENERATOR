@@ -4,6 +4,7 @@
 
 ---
 ## Live Demo:https://qr-code-generator-phi-orpin.vercel.app/
+
 ## ✨ Features
 
 ### 🛠️ Core QR Generation Modes
